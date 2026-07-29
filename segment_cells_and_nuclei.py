@@ -44,7 +44,7 @@ for filename in os.listdir(raw_images_folder_path):
         print(f"- Segmented {np.max(cells_masks)} cells")
         
         # Save the masks as a TIFF file
-        output_filename = os.path.splitext(filename)[0] + '_22.tif'
+        output_filename = os.path.splitext(filename)[0] + '.tif'
         tifffile.imwrite(os.path.join(nuclei_output_masks_folder_path, output_filename), nuclei_masks.astype(np.uint16))
         tifffile.imwrite(os.path.join(cell_output_masks_folder_path, output_filename), cells_masks.astype(np.uint16))
 
