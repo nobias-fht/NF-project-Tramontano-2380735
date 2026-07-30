@@ -18,6 +18,9 @@ raw_images_folder_path = './input_Images'
 cell_masks_folder_path = './cellpose/cells_cellpose_masks'
 nuclei_masks_folder_path = './cellpose/nuclei_cellpose_masks'
 output_folder_path = './output'
+
+# Threshold area cells to be analyzed
+THR_CELL_AREA = 10000
 # ---------------------------------------------------------------------------------------------------
 
 
@@ -132,6 +135,11 @@ for filename in filenames_list:
 
         # select current cell mask
         cell_mask_ID = select_maskID(cell_mask, cell_id)
+
+        area = np.sum(cell_mask_ID>0)
+        if area<THR_CELL_AREA:
+            continue
+
         y_center, x_center = np.argwhere(cell_mask_ID > 0).mean(axis=0)
 
         # muclei masks within the cell
